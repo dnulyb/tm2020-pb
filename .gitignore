@@ -1,3 +1,7 @@
+# Personal files
+personal/
+mymain.py
+
 # Settings
 settings.py
 data.py
