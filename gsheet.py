@@ -11,11 +11,6 @@ def write_google_sheet(values):
 
     wks = sheets[0]
 
-    all_values = ["", "", ""]
-    for i in range(len(values)):
-        all_values = all_values + values[i] + [""]
-
-    # Map 1 starts at D2
     #res = working_sheet.append_table(all_values, start="A2", end="F2", dimension="ROWS", overwrite=False)
     #print(res)
     cells = wks.get_all_values(include_tailing_empty_rows=False, include_tailing_empty=False, returnas='matrix')
@@ -30,5 +25,5 @@ def write_google_sheet(values):
     countOfnonEmptyRows = len(nonEmptyRows)    
     
     #insert at the first empty row
-    wks.insert_rows(countOfnonEmptyRows, 1, all_values, inherit=True)
+    wks.insert_rows(countOfnonEmptyRows, 1, values, inherit=True)
     

@@ -72,3 +72,19 @@ def separate_map_records(records):
     n = len(data.maps) # number of maps
     map_records = [records[index::n] for index, _ in enumerate(data.players)]
     return map_records
+
+
+
+def get_record_tuple(record):
+
+    time = format_map_record(record[0])
+    name = data.player_data[record[1]]
+    map = None
+
+    #Get map name
+    for m in data.map_data:
+        if m[0] == record[2]:
+            map = m[2]
+
+    return (time, name, map)
+
