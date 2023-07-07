@@ -4,8 +4,6 @@ from requests.auth import HTTPBasicAuth
 
 ubi_url = "https://public-ubiservices.ubi.com/v3/profiles/sessions"
 ubi_appid = "86263886-327a-4328-ac69-527f0d20a237"
-user_agent = "github.com/dnulyb/tm2020-pb"
-
 nadeo_url = "https://prod.trackmania.core.nadeo.online/v2/authentication/token/ubiservices"
 
 def authenticate():
@@ -25,6 +23,7 @@ def authenticate():
     ticket = ubi_res['ticket']
 
     # Get nadeo access token
+    
     nadeo_headers = {
         'Content-Type': 'application/json',
         'Authorization': 'ubi_v1 t=' + ticket,

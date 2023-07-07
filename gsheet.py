@@ -1,29 +1,27 @@
-
 import pygsheets
-import pandas as pd
 
-def write_google_sheet(values):
+# Writes the 'values' list to the given spreadsheet.
+# Will insert at the first non-empty row.
+# Assumes there are no empty rows in between non-empty rows.
+def write_google_sheet(values, spreadsheet_name, sheet_number, credentials_filename):
 
     # Authorize with google
-    gc = pygsheets.authorize(service_account_file="gs_credentials.json")
+    gc = pygsheets.authorize(service_account_file=credentials_filename)
 
-    sheets = gc.open("Python to Google Sheets test")
+    # Get working sheet
+    sheets = gc.open(spreadsheet_name)
+    wks = sheets[sheet_number]
 
-    wks = sheets[0]
-
-    #res = working_sheet.append_table(all_values, start="A2", end="F2", dimension="ROWS", overwrite=False)
-    #print(res)
+    # Extract all non-empty rows
     cells = wks.get_all_values(include_tailing_empty_rows=False, include_tailing_empty=False, returnas='matrix')
-    
-    #extract all non empty rows
     nonEmptyRows = []
     for i in cells:
         if i != []:
             nonEmptyRows.append(i)
 
-    #calculating the length 
+    # Get length of all non-empty rows 
     countOfnonEmptyRows = len(nonEmptyRows)    
     
-    #insert at the first empty row
+    # Insert at the first empty row
     wks.insert_rows(countOfnonEmptyRows, 1, values, inherit=True)
     
