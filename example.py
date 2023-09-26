@@ -71,4 +71,4 @@ for player in player_names:
 print(all_values)
 
 # Write to google sheets
-write_google_sheet(all_values, settings.spreadsheet_name, settings.sheet_number, settings.credentials_filename)
+google_sheet_write_full_row(all_values, settings.spreadsheet_name, settings.sheet_number, settings.credentials_filename)

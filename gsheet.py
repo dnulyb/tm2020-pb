@@ -1,9 +1,26 @@
 import pygsheets
 
+
+# Writes 'values' to the given 'range'.
+# Example: 
+#   range = "A2:A3", values = "[1,2]"
+def google_sheet_write(range, values, spreadsheet_name, sheet_number, credentials_filename):
+
+    # Authorize with google
+    gc = pygsheets.authorize(service_account_file=credentials_filename)
+
+    # Get working sheet
+    sheets = gc.open(spreadsheet_name)
+    wks = sheets[sheet_number]
+
+    # Update sheet with the new values
+    wks.update_values(crange=range, values=[values])
+
+
 # Writes the 'values' list to the given spreadsheet.
 # Will insert at the first non-empty row.
 # Assumes there are no empty rows in between non-empty rows.
-def write_google_sheet(values, spreadsheet_name, sheet_number, credentials_filename):
+def google_sheet_write_full_row(values, spreadsheet_name, sheet_number, credentials_filename):
 
     # Authorize with google
     gc = pygsheets.authorize(service_account_file=credentials_filename)
