@@ -19,9 +19,9 @@ To use, run in terminal:
 
 import config.data as data
 import config.settings as settings
-from authentication import *
-from records import *
-from gsheet import *
+from src.authentication import *
+from src.records import *
+from src.gsheet import *
 from datetime import datetime
 
 # Get access token
