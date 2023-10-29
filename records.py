@@ -1,6 +1,6 @@
 import requests
-import data
-from settings import user_agent
+import config.data as data
+from config.settings import user_agent
 
 map_info_url = "https://prod.trackmania.core.nadeo.online/maps/?mapUidList="
 map_record_url = "https://prod.trackmania.core.nadeo.online/mapRecords/"
