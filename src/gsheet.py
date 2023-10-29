@@ -4,7 +4,7 @@ import pygsheets
 # Writes 'values' to the given 'range'.
 # Example: 
 #   range = "A2:A3", values = "[1,2]"
-def google_sheet_write(range, values, spreadsheet_name, sheet_number, credentials_filename):
+def google_sheet_write(range, values, rows, spreadsheet_name, sheet_number, credentials_filename):
 
     # Authorize with google
     gc = pygsheets.authorize(service_account_file=credentials_filename)
@@ -14,7 +14,10 @@ def google_sheet_write(range, values, spreadsheet_name, sheet_number, credential
     wks = sheets[sheet_number]
 
     # Update sheet with the new values
-    wks.update_values(crange=range, values=[values])
+    if rows:
+        wks.update_values(crange=range, values=[values])
+    else:
+        wks.update_values(crange=range, values=[values], majordim='COLUMNS')
 
 
 # Writes the 'values' list to the given spreadsheet.

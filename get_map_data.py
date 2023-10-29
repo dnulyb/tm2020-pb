@@ -1,5 +1,5 @@
-from authentication import *
-from records import *
+from src.authentication import *
+from src.records import *
 import config.data as data
 
 token = authenticate()
