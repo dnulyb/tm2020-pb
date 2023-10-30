@@ -38,7 +38,6 @@ records = get_map_records(player_ids, map_ids, token)
 # Get player and map names
 player_names = list(data.player_data.values())
 map_names = [maps[2] for maps in data.map_data]
-map_names_simple = data.map_names_simple
 
 # Write map record data to google sheets
 map_sheet_ranges = data.map_sheet_ranges
@@ -57,7 +56,7 @@ for map_name in map_names:
         #   Google sheets cannot handle empty values when plotting,
         #   so we add a really bad value if there is no pb
         if(not(match)):
-            map_values = map_values + ["99.999"]
+            map_values = map_values + ["999.999"]
 
         match = False
 
@@ -65,11 +64,10 @@ for map_name in map_names:
     print(map_values)
 
     # Update gsheet with map values
-    map_range = map_sheet_ranges.get(map_names_simple.get(map_name))
-    google_sheet_write(map_range, map_values, settings.spreadsheet_name, settings.sheet_number, settings.credentials_filename)
-
+    map_range = map_sheet_ranges.get(map_name)
+    google_sheet_write(map_range, map_values, False, settings.spreadsheet_name, settings.sheet_number, settings.credentials_filename)
 
 # Store current time in settings.date_cell
 now = datetime.now()
 dmY_HMS = now.strftime("%d/%m/%Y %H:%M:%S")
-google_sheet_write(settings.date_cell, [dmY_HMS], settings.spreadsheet_name, settings.sheet_number, settings.credentials_filename)
+google_sheet_write(settings.date_cell, [dmY_HMS], True, settings.spreadsheet_name, settings.sheet_number, settings.credentials_filename)
